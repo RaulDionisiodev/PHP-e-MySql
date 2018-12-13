@@ -49,7 +49,7 @@
             return $linha;
         }
   
-        //$contador = 0 ;         
+                 
 
         function calendario($total_dias){
             $calendario = "";
@@ -79,7 +79,7 @@
                 }
                     
                     $calendario .=linha($semana);  
-                    echo $contador;
+                    //echo $contador;
                     
                    
 
