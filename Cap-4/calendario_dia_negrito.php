@@ -49,20 +49,20 @@
             return $linha;
         }
   
-        $contador = 0;         
+        //$contador = 0 ;         
 
         function calendario($total_dias){
             $calendario = "";
             $dia = 1;
             $semana = [];
-            global $contador;
-
-            
-                for($y=0; $y <= $contador; $y++){
-                   array_push($semana, " ");
+            static $contador = 0;
+                   
+                 
+                if ($contador > 1){
+                    for($y=0; $y <= ($contador - 1); $y++){
+                    array_push($semana, " ");
+                    }
                 }
-            
-                
            
                 while($dia <= $total_dias){
                     array_push($semana,$dia);
@@ -70,8 +70,9 @@
                     if(count ($semana) == 7){
                         $calendario .=linha($semana);
                         $semana = [];
-                    }else {
-                        $contador = 7 - count($semana);
+                    } else {
+                        $contador = count($semana);
+                        
                     }
 
                     $dia++;
@@ -79,8 +80,8 @@
                     
                     $calendario .=linha($semana);  
                     echo $contador;
-                    echo count($semana)."  ";
-                   // echo $contador;
+                    
+                   
 
                     return $calendario;     
             }
