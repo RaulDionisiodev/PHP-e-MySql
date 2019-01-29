@@ -1,12 +1,6 @@
 <?php
 
-$bdServidor = '127.0.0.1';
-$bdUsuario = 'sistematarefa';
-$bdSenha = 'sistema';
-$bdBanco = 'tarefas';
-
-
-$conexao = mysqli_connect($bdServidor, $bdUsuario, $bdSenha, $bdBanco);
+$conexao = mysqli_connect(BD_SERVIDOR, BD_USUARIO, BD_SENHA, BD_BANCO);
 
 mysqli_set_charset($conexao, "utf8");
 
