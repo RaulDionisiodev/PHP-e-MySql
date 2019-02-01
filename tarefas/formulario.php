@@ -51,7 +51,7 @@
 
     <label for="">
         Lembrete por email:
-        <input type="checkbox" name="lembrete" id="1">
+        <input type="checkbox" name="lembrete" value="1">
     </label>
         
         <input type="submit" value="<?php echo $tarefa['id']>0 ? 'Atualizar' : 'Cadastrar'; ?>">

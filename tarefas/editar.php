@@ -49,12 +49,11 @@ if (tem_post()){
         editar_tarefa($conexao, $tarefa);
 
         if(array_key_exists('lembrete',$_POST) && $_POST['lembrete'] == '1'){
-            $anexos = buscar_anexo($conexao, $tarefa['id']);
+            $anexos = buscar_anexos($conexao, $tarefa['id']);
             enviar_email($tarefa, $anexos);
         }
-
-        header('location: tarefas.php');
-        die();
+         header('location: tarefas.php');   
+         die();
     }
 }
 

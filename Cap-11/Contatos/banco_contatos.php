@@ -1,9 +1,9 @@
 <?php
 
-$bdServidor = '127.0.0.1';
-$bdUsuario = 'sistemacontatos';
-$bdSenha = 'sistema2';
-$bdBanco = 'contatos';
+$bdServidor = ''; //inserir servidor entre as aspas
+$bdUsuario = ''; // inserir nome do usuário entre as aspas
+$bdSenha = ''; // inserir a senha entre as aspas 
+$bdBanco = ''; // inserir nome do BD entre as aspas 
 
 
 $conexao = mysqli_connect($bdServidor, $bdUsuario, $bdSenha, $bdBanco);

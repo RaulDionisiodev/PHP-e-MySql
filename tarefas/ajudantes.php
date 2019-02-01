@@ -113,17 +113,41 @@ function tratar_anexo($anexo){
 }
 
 function enviar_email($tarefa, $anexos = []){
-    
+
+    include "bibliotecas/PHPMailer/PHPMailerAutoload.php";
     $corpo = preparar_corpo_email($tarefa, $anexos);
     //	Acessar	a	aplicação	de	e-mails;
     //	Fazer	a	autenticação	com	usuário	e	senha;
-	//	Usar	a	opção	para	escrever	um	e-mail;
-	//	Digitar	o	e-mail	do	destinatário;
-	//	Digitar	o	assunto	do	e-mail;
-	//	Escrever	o	corpo	do	e-mail;
+    //	Usar	a	opção	para	escrever	um	e-mail;
+    $email = new PHPMailer();
+    $email -> isSMTP();
+    $email->CharSet = 'UTF-8';
+    $email -> Host = "smtp.gmail.com";
+    $email -> Port = 587;
+    $email -> SMTPSecure = 'tls';
+    $email -> SMTPAuth = true;
+    $email -> Username = "seu_email@gmail.com";
+    $email -> Password = "sua_senha";
+    $email -> SetFrom("email_remetente", "Avisador de tarefas");
+    //	Digitar	o	e-mail	do	destinatário;
+    $email -> addAddress(EMAIL_NOTIFICACAO);
+    //	Digitar	o	assunto	do	e-mail;
+    $email -> Subject = "Aviso de tarefa: {$tarefa['nome']}";
+    //	Escrever	o	corpo	do	e-mail;
+    $email -> msgHTML($corpo);
     //	Adicionar	os	anexos,	quando	necessário;
+    foreach($anexos as $anexo){
+        $email -> addAttachment("anexos/{$anexo['arquivo']}");
+    }
     //	Usar	a	opção	de	enviar	o	e-mail.
-                 
+    $email -> send();     
+
+    if(!$email -> send()){
+
+        gravar_log($email->ErrorInfo);
+
+    }
+
 }
 
 function preparar_corpo_email($tarefa, $anexos){
@@ -143,6 +167,15 @@ function preparar_corpo_email($tarefa, $anexos){
     ob_end_clean();
 
     return $corpo;
+}
+
+function gravar_log($mensagem){
+
+    $datahora = date("Y-m-d H:i:s");
+    $mensagem  = "{$datahora} {$mensagem}\n";
+
+    file_put_contents("mensagens.log", $mensagem, FILE_APPEND);
+
 }
 
 

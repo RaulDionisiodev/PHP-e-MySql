@@ -1,12 +1,12 @@
 <?php
  // Conexão com o banco de dados MySql
 
- define("BD_SERVIDOR","127.0.0.1");
- define("BD_USUARIO","sistematarefa");
- define("BD_SENHA","sistema");
- define("BD_BANCO","tarefas");
+ define("BD_SERVIDOR","");//insesir servidor entre as aspas
+ define("BD_USUARIO","");//inserir usuário entre as aspas 
+ define("BD_SENHA","");//inserir senha entre as aspas
+ define("BD_BANCO","");//inserir nome do banco entre as aspas
 
  //EMAIL para a notificação
- define("EMAIL_NOTIFICACAO", "rauldionisiosh@gmail.com");
+ define("EMAIL_NOTIFICACAO", "Email_do_destinatário");
 
 ?>
