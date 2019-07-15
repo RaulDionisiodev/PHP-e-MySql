@@ -126,9 +126,9 @@ function enviar_email($tarefa, $anexos = []){
     $email -> Port = 587;
     $email -> SMTPSecure = 'tls';
     $email -> SMTPAuth = true;
-    $email -> Username = "rauldionisiosh@gmail.com";
-    $email -> Password = "dionisio*198";
-    $email -> SetFrom("raudionisiosh@gmail.com", "Avisador de tarefas");
+    $email -> Username = "email@email.com";
+    $email -> Password = "SuaSenhaAqui";
+    $email -> SetFrom("Remetente", "Avisador de tarefas");
     //	Digitar	o	e-mail	do	destinatário;
     $email -> addAddress(EMAIL_NOTIFICACAO);
     //	Digitar	o	assunto	do	e-mail;
