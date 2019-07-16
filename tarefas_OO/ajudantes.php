@@ -53,9 +53,9 @@ function traduz_data_para_exibir($data){
         return $data;
     }
 
-    $objeto_data = DateTime :: createFromFormat ('Y-m-d', $data);
+    $objeto_data = DateTime::createFromFormat ('Y-m-d', $data);
 
-    return $objeto_data -> format('d/m/Y');
+    return $objeto_data->format('d/m/Y');
 
 }
 
@@ -112,10 +112,10 @@ function tratar_anexo($anexo){
     return true;
 }
 
-function enviar_email($tarefa, $anexos = []){
+function enviar_email(Tarefa $tarefa){
 
     include "bibliotecas/PHPMailer/PHPMailerAutoload.php";
-    $corpo = preparar_corpo_email($tarefa, $anexos);
+    $corpo = preparar_corpo_email($tarefa);
     //	Acessar	a	aplicação	de	e-mails;
     //	Fazer	a	autenticação	com	usuário	e	senha;
     //	Usar	a	opção	para	escrever	um	e-mail;
@@ -126,18 +126,18 @@ function enviar_email($tarefa, $anexos = []){
     $email -> Port = 587;
     $email -> SMTPSecure = 'tls';
     $email -> SMTPAuth = true;
-    $email -> Username = "email@email.com";
-    $email -> Password = "SuaSenhaAqui";
-    $email -> SetFrom("Remetente", "Avisador de tarefas");
+    $email -> Username = "rauldionisiosh@gmail.com";
+    $email -> Password = PASSWORD;
+    $email -> SetFrom("raudionisiosh@gmail.com", "Avisador de tarefas");
     //	Digitar	o	e-mail	do	destinatário;
     $email -> addAddress(EMAIL_NOTIFICACAO);
     //	Digitar	o	assunto	do	e-mail;
-    $email -> Subject = "Aviso de tarefa: {$tarefa['nome']}";
+    $email -> Subject = "Aviso de tarefa: {$tarefa->getNome()}";
     //	Escrever	o	corpo	do	e-mail;
     $email -> msgHTML($corpo);
     //	Adicionar	os	anexos,	quando	necessário;
     foreach($anexos as $anexo){
-        $email -> addAttachment("anexos/{$anexo['arquivo']}");
+        $email -> addAttachment("anexos/{$anexo->getArquivo()}");
     }
     //	Usar	a	opção	de	enviar	o	e-mail.
     $email -> send();     
@@ -150,7 +150,7 @@ function enviar_email($tarefa, $anexos = []){
 
 }
 
-function preparar_corpo_email($tarefa, $anexos){
+function preparar_corpo_email(Tarefa $tarefa){
     // Objetivo: pegar o conteúdo do template_email.php
 
     //Falar para o PHP que não é para enviar o  resultado do processamento

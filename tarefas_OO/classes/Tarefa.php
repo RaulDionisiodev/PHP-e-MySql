@@ -48,7 +48,7 @@ class Tarefa{
         $this->prazo =  $prazo;
     }
 
-    public function getPrazo()   {
+    public function getPrazo(){
         return $this->prazo;
     }
 

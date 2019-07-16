@@ -80,8 +80,8 @@
 
     
 ?>
-<pre><?php var_dump($_POST); ?></pre>
-<pre><?php var_dump(tem_post()); ?></pre>
+<pre><?php var_dump($tarefa->getPrazo()); ?></pre>
+
 
 
 
