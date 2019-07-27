@@ -54,7 +54,7 @@ function traduz_data_para_exibir($data){
     }
 
     $objeto_data = DateTime::createFromFormat ('Y-m-d', $data);
-
+    
     return $objeto_data->format('d/m/Y');
 
 }
@@ -120,6 +120,7 @@ function enviar_email(Tarefa $tarefa){
     //	Fazer	a	autenticação	com	usuário	e	senha;
     //	Usar	a	opção	para	escrever	um	e-mail;
     $email = new PHPMailer();
+    //$email->SMTPDebug = 1; 
     $email -> isSMTP();
     $email->CharSet = 'UTF-8';
     $email -> Host = "smtp.gmail.com";
@@ -136,11 +137,11 @@ function enviar_email(Tarefa $tarefa){
     //	Escrever	o	corpo	do	e-mail;
     $email -> msgHTML($corpo);
     //	Adicionar	os	anexos,	quando	necessário;
-    foreach($anexos as $anexo){
+    foreach($tarefa->getAnexos() as $anexo){
         $email -> addAttachment("anexos/{$anexo->getArquivo()}");
     }
     //	Usar	a	opção	de	enviar	o	e-mail.
-    $email -> send();     
+    //$email -> send();     
 
     if(!$email -> send()){
 
@@ -180,7 +181,7 @@ function gravar_log($mensagem){
 
 function traduz_data_br_para_objeto($data){
 
-    if($data == ''){
+    if($data == ""){
         return "";
     }
 

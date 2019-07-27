@@ -11,7 +11,7 @@ if(mysqli_connect_errno($conexao)){
 }
 
 
-function buscar_tarefas($conexao){
+/*function buscar_tarefas($conexao){
 
     $sqlBusca = 'SELECT * FROM tarefas';
     $resultado = mysqli_query($conexao, $sqlBusca);
@@ -103,7 +103,7 @@ function remover_anexo($conexao, $id){
 
     mysqli_query($conexao, $sqlRemover);
 
-}
+}*/
 
 ?>
 

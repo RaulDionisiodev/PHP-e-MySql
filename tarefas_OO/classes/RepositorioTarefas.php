@@ -76,6 +76,11 @@ class RepositorioTarefas
         $tarefas = [];
 
         while ($tarefa = $resultado->fetch_object('Tarefa')) {
+            
+            $tarefa->setAnexos(
+                $this->buscar_anexos($tarefa->getId())
+            );
+
             $tarefas[] = $tarefa; 
         }
 
@@ -88,6 +93,7 @@ class RepositorioTarefas
         $sqlBusca = "SELECT * FROM tarefas WHERE  id = {$tarefa_id}";
         $resultado = $this->conexao->query($sqlBusca);
         $tarefa = $resultado->fetch_object('Tarefa');
+        $tarefa->setAnexos($this->buscar_anexos($tarefa->getId()));
 
         return $tarefa;
         
@@ -99,6 +105,50 @@ class RepositorioTarefas
 
         $this->conexao->query($sqlRemover);
     }
-}
 
+   
+   public function buscar_anexos($tarefa_id)
+   {
+        $sqlBusca = "SELECT * FROM anexos WHERE tarefa_id = {$tarefa_id}";
+
+        $resultado = $this->conexao->query($sqlBusca);
+
+        $anexos = array();
+
+        while ($anexo = $resultado->fetch_object('Anexo')) {
+            $anexos[] = $anexo;
+        }
+
+        return $anexos;
+   }
+
+   public function buscar_anexo($anexo_id)
+   {
+       $sqlBusca = "SELECT * FROM anexos WHERE id = {$anexo_id}";
+
+       $resultado = $this->conexao->query($sqlBusca);
+
+        return $resultado->fetch_object('Anexo');
+   }
+
+   public function salvar_anexo(Anexo $anexo)
+   {
+       $sqlGravar = "INSERT INTO anexos (tarefa_id, nome, arquivo)
+                     VALUES(
+                         {$anexo->getTarefaId()},
+                         '{$anexo->getNome()}',
+                         '{$anexo->getArquivo()}'        
+                     )";
+
+        $this->conexao->query($sqlGravar);
+   }
+
+   public function remover_anexo($id)
+   {
+        $sqlRemover = "DELETE FROM anexos WHERE id = {$id}";
+
+        $this->conexao->query($sqlRemover);
+   }
+
+}
 ?>

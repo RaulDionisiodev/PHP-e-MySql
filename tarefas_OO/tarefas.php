@@ -4,6 +4,7 @@
     require 'banco.php';
     require 'ajudantes.php';
     require 'classes/Tarefa.php';
+    require 'classes/Anexos.php';
     require 'classes/RepositorioTarefas.php';
 
     $repositorio_tarefas = new RepositorioTarefas($conexao);
@@ -37,7 +38,7 @@
             if(array_key_exists('prazo', $_POST) && strlen($_POST['prazo'])  > 0){
                 
                 if(validar_data($_POST['prazo'])){
-                    $tarefa->setPrazo(traduz_data_br_para_objeto($_POST['prazo']));
+                    $tarefa->setPrazo(traduz_data_para_banco($_POST['prazo']));
                 } else {
                     $tem_erros = true;
                     $erros_validacao['prazo'] = 'O prazo não é uma data válida';} 
@@ -80,7 +81,6 @@
 
     
 ?>
-<pre><?php var_dump($tarefa->getPrazo()); ?></pre>
 
 
 

@@ -12,7 +12,7 @@
 
 <p>
     <strong>Prazo:</strong>
-    <?php echo $tarefa->getPrazo();?>
+    <?php echo traduz_data_para_exibir($tarefa->getPrazo());?>
 </p>
 
 <p>
